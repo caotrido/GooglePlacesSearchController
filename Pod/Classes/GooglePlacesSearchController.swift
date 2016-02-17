@@ -393,6 +393,7 @@ class GooglePlaceDetailsRequest {
         GooglePlacesRequestHelpers.doRequest(
             "https://maps.googleapis.com/maps/api/place/details/json",
             params: [
+                "language": "en",
                 "placeid": place.id,
                 "key": place.apiKey ?? ""
             ]
