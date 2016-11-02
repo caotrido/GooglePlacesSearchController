@@ -413,7 +413,7 @@ class GooglePlacesRequestHelpers {
     fileprivate class func query(_ parameters: [String: AnyObject]) -> String {
         var components: [(String, String)] = []
         for key in Array(parameters.keys).sorted() {
-            let value: AnyObject! = parameters[key]
+            let value: Any = parameters[key]!
             components += [(key, "\(value)")]
         }
         
