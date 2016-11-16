@@ -291,24 +291,28 @@ extension GooglePlacesAutocompleteContainer {
     override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! GooglePlaceTableViewCell
         
-        // Get the corresponding candy from our candies array
-        let place = self.places[indexPath.row]
-        
-        // Configure the cell
-        cell.nameLabel.text = place.name
-        
-        cell.addressLabel.text = place.description
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        if indexPath.row < places.count {
+            // Get the corresponding candy from our candies array
+            let place = self.places[indexPath.row]
+            
+            // Configure the cell
+            cell.nameLabel.text = place.name
+            
+            cell.addressLabel.text = place.description
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        }
         
         return cell
     }
     
     override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let place = places[indexPath.row]
-        
-        place.getDetails { [unowned self] details in
-            self.closure?(details)
+        if indexPath.row < places.count {
+            let place = places[indexPath.row]
+            
+            place.getDetails { [weak self] details in
+                guard let strongSelf = self else { return }
+                strongSelf.closure?(details)
+            }
         }
     }
 }
