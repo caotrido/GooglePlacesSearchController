@@ -230,7 +230,7 @@ open class GooglePlacesAutocompleteContainer: UITableViewController, UISearchRes
         
         tableView.register(GooglePlaceTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         //FIXME: Dynamic fonts updating
         //Dynamic fonts observer
@@ -248,21 +248,21 @@ private class GooglePlaceTableViewCell: UITableViewCell {
     var nameLabel = UILabel()
     var addressLabel = UILabel()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
-        self.selectionStyle = UITableViewCellSelectionStyle.gray
+        self.selectionStyle = UITableViewCell.SelectionStyle.gray
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         addressLabel.translatesAutoresizingMaskIntoConstraints = false
         
         nameLabel.textColor = UIColor.black
         nameLabel.backgroundColor = UIColor.white
-        nameLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+        nameLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
         
         addressLabel.textColor = UIColor(hue: 0.9972, saturation: 0, brightness: 0.54, alpha: 1.0)
         addressLabel.backgroundColor = UIColor.white
-        addressLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+        addressLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote)
         addressLabel.numberOfLines = 0
         
         contentView.addSubview(nameLabel)
@@ -273,9 +273,9 @@ private class GooglePlaceTableViewCell: UITableViewCell {
             "address" : addressLabel
         ]
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[name]-[address]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[name]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[address]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[name]-[address]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[name]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[address]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDict))
     }
     
     required init?(coder: NSCoder) {
@@ -299,7 +299,7 @@ extension GooglePlacesAutocompleteContainer {
             cell.nameLabel.text = place.name
             
             cell.addressLabel.text = place.description
-            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }
         
         return cell
